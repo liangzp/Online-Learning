@@ -13261,7 +13261,7 @@ a.anchor-link {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Formulation--Bernoulli-Bandit">Formulation--Bernoulli Bandit<a class="anchor-link" href="#Formulation--Bernoulli-Bandit">&#182;</a></h2><ul>
+<h2 id="Bernoulli-Bandit--Problem">Bernoulli Bandit  Problem<a class="anchor-link" href="#Bernoulli-Bandit--Problem">&#182;</a></h2><ul>
 <li>K Bandits</li>
 <li>T periods</li>
 <li>For No.i bandit, reward 1 with probability $\theta_i, 0$ with $1-\theta_i$</li>
@@ -13302,7 +13302,7 @@ a.anchor-link {
 
 </div>
 </div>
-</div><div class="fragment">
+</div></section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -13313,7 +13313,7 @@ a.anchor-link {
 
 </div>
 </div>
-</div></div></section><section>
+</div><div class="fragment">
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -13322,466 +13322,7 @@ a.anchor-link {
 </div>
 </div>
 </div>
-</div><aside class="notes">
-
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">reproduce_figures</span> <span class="k">import</span> <span class="n">main</span>
-<span class="n">main</span><span class="p">(</span><span class="s2">&quot;3&quot;</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">,</span> <span class="s2">&quot;./tmp/&quot;</span><span class="p">,</span> <span class="s2">&quot;./tmp/&quot;</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>********************************************************************************
-Reproducing Figure 3, from TS Tutorial https://arxiv.org/abs/1707.02038
-With run_frac 0.01 this will launch 200 jobs, compared to 20000 in the paper.
-The config file with all necessary details of the underlying experiment is 
-   finite_arm.config_simple.
-The experiment results are saved to ./tmp/ with experiment_id finite_simple.
-The output plots are saved to ./tmp/ with experiment_id finite_simple.
-
-
-********************************************************************************
-Starting job 0 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 0 --save_path ./tmp/
-Starting job 1 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 1 --save_path ./tmp/
-Starting job 2 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 2 --save_path ./tmp/
-Starting job 3 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 3 --save_path ./tmp/
-Starting job 4 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 4 --save_path ./tmp/
-Starting job 5 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 5 --save_path ./tmp/
-Starting job 6 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 6 --save_path ./tmp/
-Starting job 7 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 7 --save_path ./tmp/
-Starting job 8 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 8 --save_path ./tmp/
-Starting job 9 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 9 --save_path ./tmp/
-Starting job 10 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 10 --save_path ./tmp/
-Starting job 11 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 11 --save_path ./tmp/
-Starting job 12 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 12 --save_path ./tmp/
-Starting job 13 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 13 --save_path ./tmp/
-Starting job 14 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 14 --save_path ./tmp/
-Starting job 15 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 15 --save_path ./tmp/
-Starting job 16 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 16 --save_path ./tmp/
-Starting job 17 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 17 --save_path ./tmp/
-Starting job 18 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 18 --save_path ./tmp/
-Starting job 19 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 19 --save_path ./tmp/
-Starting job 20 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 20 --save_path ./tmp/
-Starting job 21 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 21 --save_path ./tmp/
-Starting job 22 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 22 --save_path ./tmp/
-Starting job 23 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 23 --save_path ./tmp/
-Starting job 24 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 24 --save_path ./tmp/
-Starting job 25 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 25 --save_path ./tmp/
-Starting job 26 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 26 --save_path ./tmp/
-Starting job 27 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 27 --save_path ./tmp/
-Starting job 28 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 28 --save_path ./tmp/
-Starting job 29 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 29 --save_path ./tmp/
-Starting job 30 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 30 --save_path ./tmp/
-Starting job 31 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 31 --save_path ./tmp/
-Starting job 32 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 32 --save_path ./tmp/
-Starting job 33 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 33 --save_path ./tmp/
-Starting job 34 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 34 --save_path ./tmp/
-Starting job 35 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 35 --save_path ./tmp/
-Starting job 36 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 36 --save_path ./tmp/
-Starting job 37 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 37 --save_path ./tmp/
-Starting job 38 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 38 --save_path ./tmp/
-Starting job 39 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 39 --save_path ./tmp/
-Starting job 40 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 40 --save_path ./tmp/
-Starting job 41 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 41 --save_path ./tmp/
-Starting job 42 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 42 --save_path ./tmp/
-Starting job 43 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 43 --save_path ./tmp/
-Starting job 44 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 44 --save_path ./tmp/
-Starting job 45 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 45 --save_path ./tmp/
-Starting job 46 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 46 --save_path ./tmp/
-Starting job 47 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 47 --save_path ./tmp/
-Starting job 48 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 48 --save_path ./tmp/
-Starting job 49 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 49 --save_path ./tmp/
-Starting job 50 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 50 --save_path ./tmp/
-Starting job 51 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 51 --save_path ./tmp/
-Starting job 52 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 52 --save_path ./tmp/
-Starting job 53 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 53 --save_path ./tmp/
-Starting job 54 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 54 --save_path ./tmp/
-Starting job 55 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 55 --save_path ./tmp/
-Starting job 56 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 56 --save_path ./tmp/
-Starting job 57 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 57 --save_path ./tmp/
-Starting job 58 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 58 --save_path ./tmp/
-Starting job 59 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 59 --save_path ./tmp/
-Starting job 60 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 60 --save_path ./tmp/
-Starting job 61 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 61 --save_path ./tmp/
-Starting job 62 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 62 --save_path ./tmp/
-Starting job 63 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 63 --save_path ./tmp/
-Starting job 64 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 64 --save_path ./tmp/
-Starting job 65 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 65 --save_path ./tmp/
-Starting job 66 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 66 --save_path ./tmp/
-Starting job 67 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 67 --save_path ./tmp/
-Starting job 68 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 68 --save_path ./tmp/
-Starting job 69 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 69 --save_path ./tmp/
-Starting job 70 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 70 --save_path ./tmp/
-Starting job 71 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 71 --save_path ./tmp/
-Starting job 72 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 72 --save_path ./tmp/
-Starting job 73 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 73 --save_path ./tmp/
-Starting job 74 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 74 --save_path ./tmp/
-Starting job 75 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 75 --save_path ./tmp/
-Starting job 76 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 76 --save_path ./tmp/
-Starting job 77 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 77 --save_path ./tmp/
-Starting job 78 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 78 --save_path ./tmp/
-Starting job 79 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 79 --save_path ./tmp/
-Starting job 80 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 80 --save_path ./tmp/
-Starting job 81 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 81 --save_path ./tmp/
-Starting job 82 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 82 --save_path ./tmp/
-Starting job 83 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 83 --save_path ./tmp/
-Starting job 84 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 84 --save_path ./tmp/
-Starting job 85 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 85 --save_path ./tmp/
-Starting job 86 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 86 --save_path ./tmp/
-Starting job 87 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 87 --save_path ./tmp/
-Starting job 88 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 88 --save_path ./tmp/
-Starting job 89 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 89 --save_path ./tmp/
-Starting job 90 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 90 --save_path ./tmp/
-Starting job 91 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 91 --save_path ./tmp/
-Starting job 92 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 92 --save_path ./tmp/
-Starting job 93 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 93 --save_path ./tmp/
-Starting job 94 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 94 --save_path ./tmp/
-Starting job 95 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 95 --save_path ./tmp/
-Starting job 96 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 96 --save_path ./tmp/
-Starting job 97 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 97 --save_path ./tmp/
-Starting job 98 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 98 --save_path ./tmp/
-Starting job 99 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 99 --save_path ./tmp/
-Starting job 100 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 100 --save_path ./tmp/
-Starting job 101 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 101 --save_path ./tmp/
-Starting job 102 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 102 --save_path ./tmp/
-Starting job 103 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 103 --save_path ./tmp/
-Starting job 104 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 104 --save_path ./tmp/
-Starting job 105 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 105 --save_path ./tmp/
-Starting job 106 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 106 --save_path ./tmp/
-Starting job 107 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 107 --save_path ./tmp/
-Starting job 108 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 108 --save_path ./tmp/
-Starting job 109 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 109 --save_path ./tmp/
-Starting job 110 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 110 --save_path ./tmp/
-Starting job 111 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 111 --save_path ./tmp/
-Starting job 112 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 112 --save_path ./tmp/
-Starting job 113 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 113 --save_path ./tmp/
-Starting job 114 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 114 --save_path ./tmp/
-Starting job 115 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 115 --save_path ./tmp/
-Starting job 116 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 116 --save_path ./tmp/
-Starting job 117 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 117 --save_path ./tmp/
-Starting job 118 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 118 --save_path ./tmp/
-Starting job 119 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 119 --save_path ./tmp/
-Starting job 120 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 120 --save_path ./tmp/
-Starting job 121 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 121 --save_path ./tmp/
-Starting job 122 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 122 --save_path ./tmp/
-Starting job 123 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 123 --save_path ./tmp/
-Starting job 124 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 124 --save_path ./tmp/
-Starting job 125 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 125 --save_path ./tmp/
-Starting job 126 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 126 --save_path ./tmp/
-Starting job 127 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 127 --save_path ./tmp/
-Starting job 128 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 128 --save_path ./tmp/
-Starting job 129 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 129 --save_path ./tmp/
-Starting job 130 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 130 --save_path ./tmp/
-Starting job 131 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 131 --save_path ./tmp/
-Starting job 132 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 132 --save_path ./tmp/
-Starting job 133 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 133 --save_path ./tmp/
-Starting job 134 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 134 --save_path ./tmp/
-Starting job 135 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 135 --save_path ./tmp/
-Starting job 136 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 136 --save_path ./tmp/
-Starting job 137 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 137 --save_path ./tmp/
-Starting job 138 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 138 --save_path ./tmp/
-Starting job 139 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 139 --save_path ./tmp/
-Starting job 140 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 140 --save_path ./tmp/
-Starting job 141 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 141 --save_path ./tmp/
-Starting job 142 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 142 --save_path ./tmp/
-Starting job 143 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 143 --save_path ./tmp/
-Starting job 144 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 144 --save_path ./tmp/
-Starting job 145 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 145 --save_path ./tmp/
-Starting job 146 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 146 --save_path ./tmp/
-Starting job 147 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 147 --save_path ./tmp/
-Starting job 148 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 148 --save_path ./tmp/
-Starting job 149 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 149 --save_path ./tmp/
-Starting job 150 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 150 --save_path ./tmp/
-Starting job 151 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 151 --save_path ./tmp/
-Starting job 152 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 152 --save_path ./tmp/
-Starting job 153 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 153 --save_path ./tmp/
-Starting job 154 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 154 --save_path ./tmp/
-Starting job 155 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 155 --save_path ./tmp/
-Starting job 156 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 156 --save_path ./tmp/
-Starting job 157 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 157 --save_path ./tmp/
-Starting job 158 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 158 --save_path ./tmp/
-Starting job 159 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 159 --save_path ./tmp/
-Starting job 160 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 160 --save_path ./tmp/
-Starting job 161 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 161 --save_path ./tmp/
-Starting job 162 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 162 --save_path ./tmp/
-Starting job 163 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 163 --save_path ./tmp/
-Starting job 164 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 164 --save_path ./tmp/
-Starting job 165 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 165 --save_path ./tmp/
-Starting job 166 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 166 --save_path ./tmp/
-Starting job 167 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 167 --save_path ./tmp/
-Starting job 168 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 168 --save_path ./tmp/
-Starting job 169 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 169 --save_path ./tmp/
-Starting job 170 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 170 --save_path ./tmp/
-Starting job 171 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 171 --save_path ./tmp/
-Starting job 172 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 172 --save_path ./tmp/
-Starting job 173 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 173 --save_path ./tmp/
-Starting job 174 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 174 --save_path ./tmp/
-Starting job 175 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 175 --save_path ./tmp/
-Starting job 176 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 176 --save_path ./tmp/
-Starting job 177 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 177 --save_path ./tmp/
-Starting job 178 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 178 --save_path ./tmp/
-Starting job 179 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 179 --save_path ./tmp/
-Starting job 180 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 180 --save_path ./tmp/
-Starting job 181 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 181 --save_path ./tmp/
-Starting job 182 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 182 --save_path ./tmp/
-Starting job 183 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 183 --save_path ./tmp/
-Starting job 184 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 184 --save_path ./tmp/
-Starting job 185 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 185 --save_path ./tmp/
-Starting job 186 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 186 --save_path ./tmp/
-Starting job 187 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 187 --save_path ./tmp/
-Starting job 188 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 188 --save_path ./tmp/
-Starting job 189 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 189 --save_path ./tmp/
-Starting job 190 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 190 --save_path ./tmp/
-Starting job 191 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 191 --save_path ./tmp/
-Starting job 192 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 192 --save_path ./tmp/
-Starting job 193 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 193 --save_path ./tmp/
-Starting job 194 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 194 --save_path ./tmp/
-Starting job 195 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 195 --save_path ./tmp/
-Starting job 196 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 196 --save_path ./tmp/
-Starting job 197 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 197 --save_path ./tmp/
-Starting job 198 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 198 --save_path ./tmp/
-Starting job 199 out of 200
-python batch_runner.py --config finite_arm.config_simple --job_id 199 --save_path ./tmp/
-********************************************************************************
-Saving final plot to ./tmp/finite_simple_greedy_action.png
-This may not *precisely* match the paper due to run_frac 0.01
-********************************************************************************
-
-
-
-
-********************************************************************************
-Saving final plot to ./tmp/finite_simple_ts_action.png
-This may not *precisely* match the paper due to run_frac 0.01
-********************************************************************************
-
-
-
-
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-</aside></section><section>
+</div></div></section><section>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
@@ -14016,12 +13557,12 @@ where $A=-(\nabla^2 ln(g(\phi))|_{\phi=\phi_0})^{-1}$ and $W_n\sim N(0,1)$</p>
 </div></div></section><section>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[21]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">FiniteBernoulliBanditLangevin</span><span class="p">(</span><span class="n">FiniteBernoulliBanditTS</span><span class="p">):</span>
   <span class="sd">&#39;&#39;&#39;Langevin method for approximate posterior sampling.&#39;&#39;&#39;</span> 
-  <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">n_arm</span><span class="p">,</span> <span class="n">step_count</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span><span class="n">step_size</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span><span class="n">a0</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">b0</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">epsilon</span><span class="o">=</span><span class="mf">0.0</span><span class="p">):</span>
+  <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">n_arm</span><span class="p">,</span> <span class="n">step_count</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span><span class="n">step_size</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span><span class="n">a0</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">b0</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">epsilon</span><span class="o">=</span><span class="mf">0.0</span><span class="p">):</span>
     <span class="n">FiniteBernoulliBanditTS</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">n_arm</span><span class="p">,</span> <span class="n">a0</span><span class="p">,</span> <span class="n">b0</span><span class="p">,</span> <span class="n">epsilon</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">step_count</span> <span class="o">=</span> <span class="n">step_count</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">step_size</span> <span class="o">=</span> <span class="n">step_size</span>
@@ -14050,7 +13591,7 @@ where $A=-(\nabla^2 ln(g(\phi))|_{\phi=\phi_0})^{-1}$ and $W_n\sim N(0,1)$</p>
 </div></section><section>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[22]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span>  <span class="k">def</span> <span class="nf">get_posterior_sample</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -14118,6 +13659,13 @@ where $A=-(\nabla^2 ln(g(\phi))|_{\phi=\phi_0})^{-1}$ and $W_n\sim N(0,1)$</p>
 </div>
 
 </div></div></section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<div align=center><img src="https://raw.githubusercontent.com/liangzp/Online-Learning/master/Approximation2.png" width = "1008" height = "800" alt="approximation2" align=center/></div>
+</div>
+</div>
+</div></section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
