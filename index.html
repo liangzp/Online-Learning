@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
 
-<title>ThompsonSampling slides</title>
+<title>ThompsonSampling2 slides</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -13242,64 +13242,39 @@ a.anchor-link {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Introduction-to-Thompson-Sampling">Introduction to Thompson Sampling<a class="anchor-link" href="#Introduction-to-Thompson-Sampling">&#182;</a></h1>
+<h1 id="A-Tutorial-on-Thompson-Sampling-(Part-2)">A Tutorial on Thompson Sampling (Part 2)<a class="anchor-link" href="#A-Tutorial-on-Thompson-Sampling-(Part-2)">&#182;</a></h1>
 </div>
 </div>
 </div></section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Online-Decision-Algorithm">Online Decision Algorithm<a class="anchor-link" href="#Online-Decision-Algorithm">&#182;</a></h3><p><strong>Exploit vs Explore</strong></p>
-<div align=center> <img src="https://raw.githubusercontent.com/liangzp/Online-Learning/master/Online%20Decision%20Algorithm.png" width = "750" height = "350" alt="OnlineAlgorithm.png" align=center /></div>
+<h3 id="Practical-Modeling-Considerations">Practical Modeling Considerations<a class="anchor-link" href="#Practical-Modeling-Considerations">&#182;</a></h3>
 </div>
 </div>
 </div></section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Multi-Armed-Bandit-problem-(MAB)">Multi-Armed Bandit problem (MAB)<a class="anchor-link" href="#Multi-Armed-Bandit-problem-(MAB)">&#182;</a></h2><div align=center><img src ="https://raw.githubusercontent.com/liangzp/Online-Learning/master/bandits1.jpg" width = "600" height = "200" /></div><ul>
-<li>News Recommendation</li>
-<li>Adaptive Routing</li>
-<li>$\dots$</li>
-</ul>
-
-</div>
-</div>
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Bernoulli-Bandit--Problem">Bernoulli Bandit  Problem<a class="anchor-link" href="#Bernoulli-Bandit--Problem">&#182;</a></h2><ul>
-<li>K Bandits</li>
-<li>T periods</li>
-<li>For No.i bandit, reward 1 with probability $\theta_i, 0$ with $1-\theta_i$</li>
-</ul>
-<div align=center><img src ="https://raw.githubusercontent.com/liangzp/Online-Learning/master/bandit2.png" width = "800" height = "400" /></div>
+<p><strong>Prior Distribution Specification</strong></p>
+<div align=center><img width = '800' height ='800' src ="https://raw.githubusercontent.com/liangzp/Online-Learning/master/misspecified_regret.png"/></div>
 </div>
 </div>
 </div></section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li>Prior: 
-  $$
-  p_{\theta_k}(x)=\frac{\Gamma(\alpha_k+\beta_k)}{\Gamma(\alpha_k)\Gamma(\beta_k)} x^{\alpha_k-1}(1-x)^{\beta_k-1}
-  $$</li>
-<li>Likelihood:
-  $$
-  p(y_t|\theta_k)=\theta^{y_t}_k(1-\theta_{k})^{1-y_t}
-  $$</li>
-<li>Bayesian Update for Beta-Bernoulli:
-  $$
-  (\alpha_k,\beta_k)\leftarrow \left \{
-  \begin{aligned}
-   (\alpha_k,\beta_k),&amp; &amp; if\ x_t\neq k \\
-   (\alpha_k,\beta_k)+(r_t,1-r_t),&amp; &amp; if \ x_t=k
-  \end{aligned}
-  \right.
-  $$</li>
-</ul>
+<ol>
+<li>time-varing constraints
+$$
+X\rightarrow X_t
+$$</li>
+<li>contextual online decision problems
+$$
+y_t\sim p_{\theta}(\cdot|x_t)\rightarrow y_t\sim p_{\theta}(\cdot|x_t,z_t)\\
+X_t=\{(x):x\in X\}\rightarrow X_t=\{(x,z_t):x\in X\}
+$$</li>
+</ol>
 
 </div>
 </div>
@@ -13307,20 +13282,45 @@ a.anchor-link {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li>Greedy Algorithm/ $\epsilon$-Greedy Algorithm: $\hat{\theta}=\mathbb{E}(\theta_k)$</li>
-<li>Thompson Sampling Algorithm: $\hat{\theta}$ sample from $p_{\theta_k}$</li>
-</ul>
-
+<h3 id="Nonstationary-Systems">Nonstationary Systems<a class="anchor-link" href="#Nonstationary-Systems">&#182;</a></h3>
 </div>
 </div>
 </div><div class="fragment">
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<div align=center>
-    <img src="https://raw.githubusercontent.com/liangzp/Online-Learning/master/Algorithm.png" width = "1200" height = "800" alt="Algorithm.png" align=center/>
+$$
+y_t\sim p_{\theta}(\cdot|x_t) \rightarrow y_t\sim p_{\theta_t}(\cdot|x_t)
+$$<ol>
+<li>filtering and sequential Monte Carlo</li>
+<li>trancate history</li>
+<li>discount history</li>
+</ol>
+$$
+p(u)\leftarrow \frac{\overline{p}^\gamma(u)p^{1-\gamma}(u)q_u(y_t|x_t)}{\sum_v \overline{p}^\gamma(v)p^{1-\gamma}(v)q_v(y_t|x_t)}
+$$
 </div>
+</div>
+</div></div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>In the case of Bernoulli:</strong></p>
+$$
+(\alpha_k,\beta_k)\leftarrow\{
+\begin{aligned}
+&amp;((1-\gamma)\alpha_k+\gamma\overline{\alpha},(1-\gamma)\beta_k+\gamma\overline{\beta})&amp; &amp; x_t\neq k\\
+&amp;((1-\gamma)\alpha_k+\gamma\overline{\alpha}+r_t,(1-\gamma)\beta_k+\gamma\overline{\beta}+1-r_t)&amp; &amp; x_t= k\\
+\end{aligned}
+$$
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>prior: beta(1,1),  $\overline{\alpha}=\overline{\beta}=1,  \gamma=0.01$</strong></p>
+<div align=center><img width = '800' height ='800' src ="https://raw.githubusercontent.com/liangzp/Online-Learning/master/finite_drift_simple_origin.png"/></div>
 </div>
 </div>
 </div></div></section><section>
@@ -13329,31 +13329,28 @@ a.anchor-link {
 <div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">Environment</span>
-<span class="sd">&quot;&quot;&quot;</span>
-<span class="k">class</span> <span class="nc">FiniteArmedBernoulliBandit</span><span class="p">(</span><span class="n">Environment</span><span class="p">):</span>
-  <span class="sd">&quot;&quot;&quot;Simple N-armed bandit.&quot;&quot;&quot;</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">DriftingFiniteBernoulliBanditTS</span><span class="p">(</span><span class="n">FiniteBernoulliBanditTS</span><span class="p">):</span>
+  <span class="sd">&quot;&quot;&quot;Thompson sampling on finite armed bandit.&quot;&quot;&quot;</span>
 
-  <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">probs</span><span class="p">):</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">probs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">probs</span><span class="p">)</span>
-    <span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">probs</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span>
-    <span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">probs</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">)</span>
+  <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_arm</span><span class="p">,</span> <span class="n">a0</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">b0</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="mf">0.01</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">n_arm</span> <span class="o">=</span> <span class="n">n_arm</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">a0</span> <span class="o">=</span> <span class="n">a0</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">b0</span> <span class="o">=</span> <span class="n">b0</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">prior_success</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">a0</span> <span class="k">for</span> <span class="n">arm</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_arm</span><span class="p">)])</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">prior_failure</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">b0</span> <span class="k">for</span> <span class="n">arm</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_arm</span><span class="p">)])</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">gamma</span> <span class="o">=</span> <span class="n">gamma</span>
 
-    <span class="bp">self</span><span class="o">.</span><span class="n">optimal_reward</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">probs</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">n_arm</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">probs</span><span class="p">)</span>
+  <span class="k">def</span> <span class="nf">update_observation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">observation</span><span class="p">,</span> <span class="n">action</span><span class="p">,</span> <span class="n">reward</span><span class="p">):</span>
+    <span class="c1"># Naive error checking for compatibility with environment</span>
+    <span class="k">assert</span> <span class="n">observation</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_arm</span>
 
-  <span class="k">def</span> <span class="nf">get_observation</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_arm</span>
-
-  <span class="k">def</span> <span class="nf">get_optimal_reward</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">optimal_reward</span>
-
-  <span class="k">def</span> <span class="nf">get_expected_reward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">action</span><span class="p">):</span>
-    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">probs</span><span class="p">[</span><span class="n">action</span><span class="p">]</span>
-
-  <span class="k">def</span> <span class="nf">get_stochastic_reward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">action</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">binomial</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">probs</span><span class="p">[</span><span class="n">action</span><span class="p">])</span>
+    <span class="c1"># All values decay slightly, observation updated</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">prior_success</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">prior_success</span> <span class="o">*</span> <span class="p">(</span>
+        <span class="mi">1</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">gamma</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">a0</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">gamma</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">prior_failure</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">prior_failure</span> <span class="o">*</span> <span class="p">(</span>
+        <span class="mi">1</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">gamma</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">b0</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">gamma</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">prior_success</span><span class="p">[</span><span class="n">action</span><span class="p">]</span> <span class="o">+=</span> <span class="n">reward</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">prior_failure</span><span class="p">[</span><span class="n">action</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">reward</span>
 </pre></div>
 
     </div>
@@ -13366,11 +13363,634 @@ a.anchor-link {
 <div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">Agent 1: Greedy</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">DriftingFiniteArmedBernoulliBandit</span><span class="p">(</span><span class="n">FiniteArmedBernoulliBandit</span><span class="p">):</span>
+  <span class="sd">&quot;&quot;&quot;N-armed bandit with drift.</span>
+
+<span class="sd">  Note that this code does not generate a specific fixed bandit environemnt.</span>
+<span class="sd">  Instead we simulate a draw from the Bayesian prior online, this is done to</span>
+<span class="sd">  show a simple example where the prior/posterior computations are conjugate.</span>
+
+<span class="sd">  gamma = 0 will allow us to do resampling without drift.</span>
+<span class="sd">  &quot;&quot;&quot;</span>
+
+  <span class="k">def</span> <span class="nf">advance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">action</span><span class="p">,</span> <span class="n">reward</span><span class="p">):</span>
+    <span class="c1"># All arms drift back to mixing distribution at rate gamma</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">prior_success</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">prior_success</span> <span class="o">*</span> <span class="p">(</span>
+        <span class="mi">1</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">gamma</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">a0</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">gamma</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">prior_failure</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">prior_failure</span> <span class="o">*</span> <span class="p">(</span>
+        <span class="mi">1</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">gamma</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">b0</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">gamma</span>
+
+    <span class="c1"># Sampled arm has some learning</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">prior_success</span><span class="p">[</span><span class="n">action</span><span class="p">]</span> <span class="o">+=</span> <span class="n">reward</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">prior_failure</span><span class="p">[</span><span class="n">action</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">reward</span>
+
+    <span class="c1"># Resample posterior probabilities</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">probs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">beta</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">prior_success</span><span class="p">[</span><span class="n">a</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">prior_failure</span><span class="p">[</span><span class="n">a</span><span class="p">])</span>
+        <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_arm</span><span class="p">)</span>
+    <span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div></section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>prior: beta(1,1),  $\overline{\alpha}=\overline{\beta}=1$,</strong> <strong>$\gamma$=0.03</strong></p>
+<div align=center><img width = '800' height ='800' src ="https://raw.githubusercontent.com/liangzp/Online-Learning/master/finite_drift_simple.png"/></div>
+</div>
+</div>
+</div></section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Concurrence">Concurrence<a class="anchor-link" href="#Concurrence">&#182;</a></h3><ol>
+<li>The efficiency of synchronous and asynchronous variations of concurrent TS </li>
+<li>Alter an action based onrecent experience of other agents</li>
+</ol>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Further-Examples">Further Examples<a class="anchor-link" href="#Further-Examples">&#182;</a></h2>
+</div>
+</div>
+</div></section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="News-Article-Recommendation-(Contextual-Bandit)">News Article Recommendation (Contextual Bandit)<a class="anchor-link" href="#News-Article-Recommendation-(Contextual-Bandit)">&#182;</a></h3><ul>
+<li>feature vector $z_t$</li>
+<li>news article $x_t\in X=\{1,2,\dots,k\}$</li>
+<li>a positive review occurs with probability $g(z_t^T\theta_{x_t})$, where $g(a)=1/(1+e^{-a})$</li>
+</ul>
+
+</div>
+</div>
+</div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>Simulation:</strong></p>
+<ul>
+<li>|X|=3: news articles</li>
+<li>d=7: feature dimension</li>
+<li>feature vector $z_t=(1,z^{(1)}_t,z^{(2)}_t,\dots,,z^{(6)}_t)$ where $z^{(k)}_t\sim B(1,1/6)$</li>
+<li>news preference vector $\theta_x\sim N(0,I_{7\times7})$</li>
+</ul>
+
+</div>
+</div>
+</div></div></section><section>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">NewsRecommendation</span><span class="p">(</span><span class="n">Environment</span><span class="p">):</span>
+  <span class="sd">&quot;&quot;&quot;News Recommendation Environment. The environment provides the features </span>
+<span class="sd">  vectors at any period and determines the rewards of a played action.&quot;&quot;&quot;</span>
+
+  <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">num_articles</span><span class="p">,</span><span class="n">dim</span><span class="p">,</span><span class="n">theta_mean</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">theta_std</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="o">...</span>    
+    <span class="c1"># generating the true parameters</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">thetas</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">theta_mean</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">theta_std</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">)</span> 
+                                            <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_articles</span><span class="p">)]</span>
+    
+    <span class="c1"># keeping current rewards</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">current_rewards</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">num_articles</span>
+    
+  <span class="k">def</span> <span class="nf">get_observation</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;generates context vector and computes the true</span>
+<span class="sd">    reward of each article.&#39;&#39;&#39;</span>
+    <span class="n">context</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">context_vector</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">binomial</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="o">-</span><span class="mi">1</span><span class="p">)),</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">)</span>
+    <span class="n">context_vector</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>        
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_articles</span><span class="p">):</span>
+      <span class="n">context</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">context_vector</span><span class="p">)</span>
+      <span class="bp">self</span><span class="o">.</span><span class="n">current_rewards</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">thetas</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">context_vector</span><span class="p">)))</span>
+        
+    <span class="k">return</span> <span class="n">context</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div></section><section>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">LaplaceTSNewsRecommendation</span><span class="p">(</span><span class="n">GreedyNewsRecommendation</span><span class="p">):</span>   
+  <span class="sd">&#39;&#39;&#39;Laplace approximation to TS for news recommendation problem.&#39;&#39;&#39;</span>
+  <span class="k">def</span> <span class="nf">_sampled_rewards</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">context</span><span class="p">):</span>
+    <span class="n">sampled_rewards</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_articles</span><span class="p">):</span>
+      <span class="n">x</span> <span class="o">=</span> <span class="n">context</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+      <span class="n">mean</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_map_estimates</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+      <span class="n">cov</span> <span class="o">=</span> <span class="n">npla</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">current_Hessians</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+      <span class="n">theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">multivariate_normal</span><span class="p">(</span><span class="n">mean</span><span class="p">,</span> <span class="n">cov</span><span class="p">)</span>
+      <span class="n">sampled_rewards</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">theta</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">x</span><span class="p">))))</span>
+    <span class="k">return</span> <span class="n">sampled_rewards</span>
+    
+  <span class="k">def</span> <span class="nf">pick_action</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">context</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Greedy action based on map estimates.&#39;&#39;&#39;</span>
+    <span class="n">sampled_rewards</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sampled_rewards</span><span class="p">(</span><span class="n">context</span><span class="p">)</span>
+    <span class="n">article</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">sampled_rewards</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">article</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div></section><section>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span>  <span class="k">def</span> <span class="nf">update_observation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">context</span><span class="p">,</span> <span class="n">article</span><span class="p">,</span> <span class="n">feedback</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;updates the observations for displayed article, given the context and </span>
+<span class="sd">    user&#39;s feedback. The new observations are saved in the history of the </span>
+<span class="sd">    displayed article and the current map estimate and Hessian of this </span>
+<span class="sd">    article are updated right away.</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">      context - a list containing observed context vector for each article</span>
+<span class="sd">      article - article which was recently shown</span>
+<span class="sd">      feedback - user&#39;s response.</span>
+<span class="sd">      &#39;&#39;&#39;</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">num_plays</span><span class="p">[</span><span class="n">article</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">contexts</span><span class="p">[</span><span class="n">article</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">context</span><span class="p">[</span><span class="n">article</span><span class="p">])</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">rewards</span><span class="p">[</span><span class="n">article</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">feedback</span><span class="p">)</span>
+    
+    <span class="c1"># updating the map estimate and Hessian for displayed article</span>
+    <span class="n">_</span><span class="p">,</span><span class="n">__</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_optimize_Newton_method</span><span class="p">(</span><span class="n">article</span><span class="p">)</span>
+    
+  <span class="k">def</span> <span class="nf">_optimize_Newton_method</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">article</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Optimize negative log_posterior function via Newton&#39;s method for the</span>
+<span class="sd">    given article.&quot;&quot;&quot;</span>
+    
+    <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_map_estimates</span><span class="p">[</span><span class="n">article</span><span class="p">]</span>
+    <span class="n">error</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tol</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="k">while</span> <span class="n">error</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">tol</span><span class="p">:</span>
+      <span class="n">g</span><span class="p">,</span> <span class="n">H</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compute_gradient_hessian</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">article</span><span class="p">)</span>
+      <span class="n">delta_x</span> <span class="o">=</span> <span class="o">-</span><span class="n">npla</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="n">g</span><span class="p">)</span>
+      <span class="n">step</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_back_track_search</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">delta_x</span><span class="p">,</span> <span class="n">article</span><span class="p">)</span>
+      <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">step</span> <span class="o">*</span> <span class="n">delta_x</span>
+      <span class="n">error</span> <span class="o">=</span> <span class="o">-</span><span class="n">g</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">delta_x</span><span class="p">)</span>
+      
+    <span class="c1"># computing the gradient and hessian at final point</span>
+    <span class="n">g</span><span class="p">,</span> <span class="n">H</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compute_gradient_hessian</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">article</span><span class="p">)</span>
+
+    <span class="c1"># updating current map and Hessian for this article</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">current_map_estimates</span><span class="p">[</span><span class="n">article</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">current_Hessians</span><span class="p">[</span><span class="n">article</span><span class="p">]</span> <span class="o">=</span> <span class="n">H</span>
+    <span class="k">return</span> <span class="n">x</span><span class="p">,</span> <span class="n">H</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div></section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<div align=center><img width = '800' height ='800' src ="https://raw.githubusercontent.com/liangzp/Online-Learning/master/News%20Recommendation.png"/></div>
+</div>
+</div>
+</div></section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>Generalization</strong>:</p>
+<ol>
+<li>$$
+z_{t}\rightarrow z_{t,x}\\
+\theta_x\rightarrow \theta
+$$</li>
+<li>Time-variant</li>
+</ol>
+
+</div>
+</div>
+</div></section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Product-Assortment">Product Assortment<a class="anchor-link" href="#Product-Assortment">&#182;</a></h3>
+</div>
+</div>
+</div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<div align=center><img width = '800' height ='800' src ="https://raw.githubusercontent.com/liangzp/Online-Learning/master/Products.png"/></div>
+</div>
+</div>
+</div></div></section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>X=(1,0,1,0,0,0,0,0,1,0)</strong></p>
+<div align=center><img width = '800' height ='800' src ="https://raw.githubusercontent.com/liangzp/Online-Learning/master/Products2.png"/></div>
+</div>
+</div>
+</div></section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Relationship Matrix:
+$$
+\theta=\left [
+  \begin{matrix}
+   \theta_{11} &amp; \theta_{12} &amp; \theta_{13} \\
+   \theta_{21} &amp; \theta_{22} &amp; \theta_{23} \\
+   \theta_{31} &amp; \theta_{32} &amp; \theta_{33} 
+  \end{matrix} 
+  \right] 
+$$</p>
+<p>Demand:</p>
+$$
+log(d_i)|\theta,x \sim N((\theta x)_i,\sigma^2)
+$$<p>Profit:</p>
+$$
+\mathbb{E}[\sum_{i=1}^n p_ix_id_i|\theta,x]=\sum_{i=1}^n p_ix_ie^{(\theta x)_i+\frac{\sigma^2}{2}}
+$$
+</div>
+</div>
+</div></section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Update rules:
+    $$
+    \mu\rightarrow (\Sigma^{-1}+\frac{1}{\sigma^2}W^TW)^{-1}(\Sigma^{-1}\mu+\frac{1}{\sigma^2}W^Tz)\\
+    \Sigma\rightarrow (\Sigma^{-1}+\frac{1}{\sigma^2}W^TW)^{-1}
+    $$</p>
+<p>where $W=x^T S$ and $Sj,i_j=1$ for $j=1,2,\dots,|supp(x)|$ and all its other elements are 0</p>
+
+</div>
+</div>
+</div></section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>Simulation:</strong></p>
+<ul>
+<li>n=6</li>
+<li>$\sigma^2=0.04$</li>
+<li>$p_i=1/6$ for i=1,2,...,6</li>
+<li>prior of $\theta\sim N(\mu,\Sigma)$ where $\mu=(0,0,\dots,0)$ and $\Sigma=\left [
+\begin{matrix}
+ 1 &amp; 0.2 &amp; \dots &amp; 0.2 \\
+ 0.2 &amp; 1 &amp; \dots &amp; 0.2 \\
+ \vdots &amp; \vdots &amp; \ddots &amp; \vdots\\
+ 0.2 &amp; 0.2 &amp; \dots &amp; 1
+\end{matrix} 
+\right ]$ </li>
+</ul>
+
+</div>
+</div>
+</div></section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<div align=center><img width = '800' height ='800' src ="https://raw.githubusercontent.com/liangzp/Online-Learning/master/product_assortment_simple.png"/></div>
+</div>
+</div>
+</div><aside class="notes">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">ProductAssortment</span><span class="p">(</span><span class="n">Environment</span><span class="p">):</span>
+  <span class="sd">&quot;&quot;&quot;An environment for product assortment.&quot;&quot;&quot;</span>
+
+  <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">num_products</span><span class="p">,</span> <span class="n">prior_mean</span><span class="p">,</span> <span class="n">prior_var_diagonal</span><span class="p">,</span> <span class="n">prior_var_off_diagonal</span><span class="p">,</span> <span class="n">noise_var</span><span class="p">,</span> <span class="n">profits</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Inputs:</span>
+<span class="sd">      num_products - number of products.</span>
+<span class="sd">      prior_mean - prior mean of the entries</span>
+<span class="sd">      prior_var_diagonal - prior variance of diagonal entries</span>
+<span class="sd">      prior_var_off_diagonal - prior variance of off-diagonal entries</span>
+<span class="sd">      nois_var - uncertainty in the demand </span>
+<span class="sd">      profits - the profit of selling each of the products</span>
+<span class="sd">      epsilon - used in epsilon-greedy agent</span>
+<span class="sd">      k - constant used in annealing epsilon greedy.&#39;&#39;&#39;</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">num_products</span> <span class="o">=</span> <span class="n">num_products</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">prior_mean</span> <span class="o">=</span> <span class="n">prior_mean</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">prior_var_diagonal</span> <span class="o">=</span> <span class="n">prior_var_diagonal</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">prior_var_off_diagonal</span> <span class="o">=</span> <span class="n">prior_var_off_diagonal</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">noise_var</span> <span class="o">=</span> <span class="n">noise_var</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">profits</span> <span class="o">=</span> <span class="n">profits</span>
+    
+    <span class="n">theta_off_diagonal</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">([</span><span class="n">prior_mean</span><span class="p">]</span><span class="o">*</span><span class="n">num_products</span><span class="p">)</span> <span class="o">+</span> \
+                          <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">prior_var_off_diagonal</span><span class="p">,</span>
+                                  <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">num_products</span><span class="p">,</span><span class="n">num_products</span><span class="p">))</span>
+    <span class="n">theta_off_diagonal</span> <span class="o">=</span> <span class="n">theta_off_diagonal</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">theta_off_diagonal</span><span class="p">))</span>
+    <span class="n">theta_diagonal</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">([</span><span class="n">prior_mean</span><span class="p">]</span><span class="o">*</span><span class="n">num_products</span><span class="p">)</span> <span class="o">+</span>\
+        <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">prior_var_diagonal</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">num_products</span><span class="p">,</span><span class="n">num_products</span><span class="p">))</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">theta</span> <span class="o">=</span> <span class="n">theta_diagonal</span> <span class="o">+</span> <span class="n">theta_off_diagonal</span>
+    
+    <span class="bp">self</span><span class="o">.</span><span class="n">optimal_assortment</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">num_products</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">optimal_profit</span> <span class="o">=</span> <span class="mi">0</span>
+    
+    <span class="bp">self</span><span class="o">.</span><span class="n">_find_optimal_assortment</span><span class="p">()</span>
+    
+  <span class="k">def</span> <span class="nf">_find_optimal_assortment</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;finds the optimal assortment of the products.&#39;&#39;&#39;</span>
+    
+    <span class="c1"># generating all possible assortments</span>
+    <span class="n">assortment_tuples</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">itertools</span><span class="o">.</span><span class="n">product</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">repeat</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">num_products</span><span class="p">))</span>
+    <span class="n">total_profit</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">assortment</span> <span class="ow">in</span> <span class="n">assortment_tuples</span><span class="p">:</span>
+      <span class="n">expected_demand</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">assortment</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">noise_var</span><span class="o">/</span><span class="mi">2</span> 
+                                <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">theta</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">assortment</span><span class="p">)))</span>
+      <span class="n">total_profit</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">expected_demand</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">profits</span><span class="p">))</span>
+    <span class="n">optimal_ind</span> <span class="o">=</span> <span class="n">random_argmax</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">total_profit</span><span class="p">))</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">optimal_assortment</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">assortment_tuples</span><span class="p">[</span><span class="n">optimal_ind</span><span class="p">])</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">optimal_profit</span> <span class="o">=</span> <span class="n">total_profit</span><span class="p">[</span><span class="n">optimal_ind</span><span class="p">]</span>
+        
+  <span class="k">def</span> <span class="nf">get_observation</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_products</span>
+
+  <span class="k">def</span> <span class="nf">get_optimal_reward</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">optimal_profit</span>
+
+  <span class="k">def</span> <span class="nf">get_expected_reward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">assortment</span><span class="p">):</span>
+    <span class="n">expected_demand</span> <span class="o">=</span> <span class="n">assortment</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">noise_var</span><span class="o">/</span><span class="mi">2</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">theta</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">assortment</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">expected_demand</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">profits</span><span class="p">)</span>
+  
+  <span class="k">def</span> <span class="nf">get_stochastic_reward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">assortment</span><span class="p">):</span>
+    <span class="n">random_demand</span> <span class="o">=</span> <span class="n">assortment</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">theta</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">assortment</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">noise_var</span><span class="p">)</span><span class="o">*</span>\
+                  <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">num_products</span><span class="p">))</span>
+    <span class="n">support</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nonzero</span><span class="p">(</span><span class="n">random_demand</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">random_demand</span><span class="p">[</span><span class="n">support</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</aside><aside class="notes">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">TSAssortment</span><span class="p">(</span><span class="n">Agent</span><span class="p">):</span>
+  <span class="sd">&quot;&quot;&quot;TS agent for product assortment.&quot;&quot;&quot;</span>
+
+  <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">num_products</span><span class="p">,</span> <span class="n">prior_mean</span><span class="p">,</span> <span class="n">prior_var_diagonal</span><span class="p">,</span><span class="n">prior_var_off_diagonal</span><span class="p">,</span> <span class="n">noise_var</span><span class="p">,</span> <span class="n">profits</span><span class="p">,</span> <span class="n">epsilon</span><span class="o">=</span><span class="mf">0.06</span><span class="p">,</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">9</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Inputs:</span>
+<span class="sd">      num_products - number of products.</span>
+<span class="sd">      prior_mean - prior mean of the entries</span>
+<span class="sd">      prior_var_diagonal - prior variance of diagonal entries</span>
+<span class="sd">      prior_var_off_diagonal - prior variance of off-diagonal entries</span>
+<span class="sd">      nois_var - uncertainty in the demand </span>
+<span class="sd">      profits - the profit of selling each of the products</span>
+<span class="sd">      epsilon - used in epsilon-greedy agent</span>
+<span class="sd">      k - constant used in annealing epsilon greedy.&#39;&#39;&#39;</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">num_products</span> <span class="o">=</span> <span class="n">num_products</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">prior_mean</span> <span class="o">=</span> <span class="n">prior_mean</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">prior_var_diagonal</span> <span class="o">=</span> <span class="n">prior_var_diagonal</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">prior_var_off_diagonal</span> <span class="o">=</span> <span class="n">prior_var_off_diagonal</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">noise_var</span> <span class="o">=</span> <span class="n">noise_var</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">profits</span> <span class="o">=</span> <span class="n">profits</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">epsilon</span> <span class="o">=</span> <span class="n">epsilon</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">period</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">k</span> <span class="o">=</span> <span class="n">k</span>
+    
+    <span class="bp">self</span><span class="o">.</span><span class="n">posterior_mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">prior_mean</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">num_products</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
+    <span class="n">vars_off_diagonal</span> <span class="o">=</span> <span class="n">prior_var_off_diagonal</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">num_products</span><span class="p">,</span><span class="n">num_products</span><span class="p">))</span>
+    <span class="n">vars_off_diagonal</span> <span class="o">=</span> <span class="n">vars_off_diagonal</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">vars_off_diagonal</span><span class="p">))</span>
+    <span class="n">vars_diagonal</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">([</span><span class="n">prior_var_diagonal</span><span class="p">]</span><span class="o">*</span><span class="n">num_products</span><span class="p">)</span>
+    <span class="n">vars_all</span> <span class="o">=</span> <span class="n">vars_off_diagonal</span> <span class="o">+</span> <span class="n">vars_diagonal</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">posterior_cov</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">vars_all</span><span class="o">.</span><span class="n">T</span><span class="p">,</span><span class="n">num_products</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">posterior_cov_inv</span> <span class="o">=</span> <span class="n">npla</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">posterior_cov</span><span class="p">)</span>
+  
+  <span class="k">def</span> <span class="nf">_get_selection_matrix</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">assortment</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;given an assortment, returns a selection matrix which is useful when</span>
+<span class="sd">    updating the posterior parameters.&#39;&#39;&#39;</span>
+    <span class="n">support_size</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">assortment</span><span class="p">)</span>
+    <span class="n">support</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nonzero</span><span class="p">(</span><span class="n">assortment</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">selection_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">support_size</span><span class="p">,</span><span class="n">assortment</span><span class="o">.</span><span class="n">size</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">support_size</span><span class="p">):</span>
+      <span class="n">selection_matrix</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">support</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">=</span> <span class="mi">1</span>
+      
+    <span class="k">return</span> <span class="n">selection_matrix</span>
+  
+  <span class="k">def</span> <span class="nf">update_observation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">observation</span><span class="p">,</span> <span class="n">assortment</span><span class="p">,</span> <span class="n">random_demand</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Updates observations for binomial bridge</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">      assortment - selected assortment</span>
+<span class="sd">      random_demand - random demand observed for the products</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">assert</span> <span class="n">observation</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_products</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">period</span> <span class="o">+=</span> <span class="mi">1</span>
+    
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">assortment</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">:</span>
+      <span class="n">log_demand</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">random_demand</span><span class="p">)</span>    
+      <span class="n">S</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_selection_matrix</span><span class="p">(</span><span class="n">assortment</span><span class="p">)</span>
+      <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">kron</span><span class="p">(</span><span class="n">assortment</span><span class="o">.</span><span class="n">T</span><span class="p">,</span><span class="n">S</span><span class="p">)</span>
+      <span class="n">new_cov_inv</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">posterior_cov_inv</span> <span class="o">+</span> <span class="n">X</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">X</span><span class="p">)</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">noise_var</span>
+      <span class="bp">self</span><span class="o">.</span><span class="n">posterior_cov</span> <span class="o">=</span> <span class="n">npla</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">new_cov_inv</span><span class="p">)</span>
+      <span class="bp">self</span><span class="o">.</span><span class="n">posterior_mean</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">posterior_cov</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">posterior_cov_inv</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">posterior_mean</span><span class="p">)</span><span class="o">+</span>\
+                                                   <span class="n">X</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">log_demand</span><span class="p">)</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">noise_var</span><span class="p">)</span>
+      <span class="bp">self</span><span class="o">.</span><span class="n">posterior_cov_inv</span> <span class="o">=</span> <span class="n">new_cov_inv</span>
+ 
+  <span class="k">def</span> <span class="nf">get_posterior_mean</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">posterior_mean</span>
+  
+  <span class="k">def</span> <span class="nf">get_posterior_sample</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="n">cov_square_root</span> <span class="o">=</span> <span class="n">npla</span><span class="o">.</span><span class="n">cholesky</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">posterior_cov</span><span class="p">)</span>
+    <span class="n">raw_sample</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_products</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">sample</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">posterior_mean</span> <span class="o">+</span> <span class="n">cov_square_root</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">raw_sample</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">sample</span>
+  
+  <span class="k">def</span> <span class="nf">find_optimal_assortment</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">theta_hat</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;finds the optimal assortment, given a sampled parameter.&#39;&#39;&#39;</span>
+    <span class="c1"># generating all possible assortments</span>
+    <span class="n">assortment_tuples</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">itertools</span><span class="o">.</span><span class="n">product</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">repeat</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">num_products</span><span class="p">))</span>
+    <span class="n">total_profit</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">assortment</span> <span class="ow">in</span> <span class="n">assortment_tuples</span><span class="p">:</span>
+      <span class="n">expected_demand</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">assortment</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">noise_var</span><span class="o">/</span><span class="mi">2</span> <span class="o">+</span> 
+                                <span class="n">theta_hat</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">assortment</span><span class="p">)))</span>
+      <span class="n">total_profit</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">expected_demand</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">profits</span><span class="p">))</span>
+    <span class="n">optimal_ind</span> <span class="o">=</span> <span class="n">random_argmax</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">total_profit</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">assortment_tuples</span><span class="p">[</span><span class="n">optimal_ind</span><span class="p">])</span>
+  
+  <span class="k">def</span> <span class="nf">pick_action</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">observation</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Take an action based on a posterior sample.&quot;&quot;&quot;</span>
+    <span class="n">theta_flattened</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_posterior_sample</span><span class="p">()</span>
+    <span class="n">theta_hat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">theta_flattened</span><span class="p">,</span>
+                           <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_products</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">num_products</span><span class="p">),</span><span class="n">order</span><span class="o">=</span><span class="s1">&#39;F&#39;</span><span class="p">)</span>
+    <span class="n">assortment</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">find_optimal_assortment</span><span class="p">(</span><span class="n">theta_hat</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">assortment</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</aside></section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Cascading-Recommendations">Cascading Recommendations<a class="anchor-link" href="#Cascading-Recommendations">&#182;</a></h3>
+</div>
+</div>
+</div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>K items</li>
+<li>$J\leq K$: the number of items recommended in each period</li>
+<li>$\theta\in [0,1]^{K}$: the vector of attraction probabilities</li>
+<li>$y_t$: the product which customer finally selects ($y_t=\infty$ if not select) </li>
+<li>$r_t=\mathbb{1}\{y_t\leq J\}$</li>
+</ul>
+$$
+h(x,\theta)=1-\prod_{j=1}^J[1-\theta_{x_j}]\\
+\mathbb{E}[r_t|x_t,\theta]=h(x_t,\theta)
+$$
+</div>
+</div>
+</div><aside class="notes">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">CascadingBandit</span><span class="p">(</span><span class="n">Environment</span><span class="p">):</span>
+
+  <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">num_items</span><span class="p">,</span> <span class="n">num_positions</span><span class="p">,</span> <span class="n">a0</span><span class="p">,</span> <span class="n">b0</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;A cascading bandit instance</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">      num_items - &quot;L&quot; in math notation</span>
+<span class="sd">      num_positions - &quot;K&quot; in math notation</span>
+<span class="sd">      a0 - prior success</span>
+<span class="sd">      b0 - prior failute</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">assert</span><span class="p">(</span><span class="n">num_items</span> <span class="o">&gt;=</span> <span class="n">num_positions</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">num_items</span> <span class="o">=</span> <span class="n">num_items</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">num_positions</span> <span class="o">=</span> <span class="n">num_positions</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">a0</span> <span class="o">=</span> <span class="n">a0</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">b0</span> <span class="o">=</span> <span class="n">b0</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">probs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">beta</span><span class="p">(</span><span class="n">a0</span><span class="p">,</span> <span class="n">b0</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_items</span><span class="p">)])</span>
+
+    <span class="c1"># Compute the optimal reward by sorting the best num_positions elements</span>
+    <span class="n">probs_ordered</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">probs</span><span class="p">)[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">optimal_reward</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">prod</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">probs_ordered</span><span class="p">[:</span><span class="n">num_positions</span><span class="p">])</span>
+
+    <span class="c1"># Maintain a list of all actions that failed and succeeded</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">round_failure</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">round_success</span> <span class="o">=</span> <span class="p">[]</span>
+
+
+  <span class="k">def</span> <span class="nf">get_observation</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="n">observation</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;round_failure&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">round_failure</span><span class="p">,</span>
+                   <span class="s1">&#39;round_success&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">round_success</span><span class="p">}</span>
+    <span class="k">return</span> <span class="n">observation</span>
+
+  <span class="k">def</span> <span class="nf">get_optimal_reward</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">optimal_reward</span>
+
+  <span class="k">def</span> <span class="nf">get_expected_reward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">action_list</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Gets the expected reward of an action list</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">      action_list - list of actions (of length self.num_positions)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">assert</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">action_list</span><span class="p">)</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_positions</span><span class="p">)</span>
+    <span class="n">action_probs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">probs</span><span class="p">[</span><span class="n">action_list</span><span class="p">]</span>
+    <span class="n">expected_reward</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">prod</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">action_probs</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">expected_reward</span>
+
+  <span class="k">def</span> <span class="nf">get_stochastic_reward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">action_list</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Generates a stochastic reward from action list.</span>
+<span class="sd">    Also updates self.recent_success for subsequent observations.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">      action_list - list of actions (of length self.num_positions)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">assert</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">action_list</span><span class="p">)</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_positions</span><span class="p">);</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">round_failure</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">round_success</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">action</span> <span class="ow">in</span> <span class="n">action_list</span><span class="p">:</span>
+      <span class="n">click</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">binomial</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">probs</span><span class="p">[</span><span class="n">action</span><span class="p">])</span>
+      <span class="k">if</span> <span class="n">click</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">round_success</span> <span class="o">+=</span> <span class="p">[</span><span class="n">action</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">click</span>
+      <span class="k">else</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">round_failure</span> <span class="o">+=</span> <span class="p">[</span><span class="n">action</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="mi">0</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</aside><aside class="notes">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="sd">&quot;&quot;&quot;Agents for cascading bandit problems.</span>
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="k">class</span> <span class="nc">FiniteBernoulliBanditEpsilonGreedy</span><span class="p">(</span><span class="n">Agent</span><span class="p">):</span>
-  <span class="sd">&quot;&quot;&quot;Simple agent made for finite armed bandit problems.&quot;&quot;&quot;</span>
+<span class="c1">##############################################################################</span>
+
+
+<span class="k">class</span> <span class="nc">CascadingBanditEpsilonGreedy</span><span class="p">(</span><span class="n">Agent</span><span class="p">):</span>
+
+  <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">num_items</span><span class="p">,</span> <span class="n">num_positions</span><span class="p">,</span> <span class="n">a0</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">b0</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">epsilon</span><span class="o">=</span><span class="mf">0.0</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;An agent for cascading bandits.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">      num_items - &quot;L&quot; in math notation</span>
+<span class="sd">      num_positions - &quot;K&quot; in math notation</span>
+<span class="sd">      a0 - prior success</span>
+<span class="sd">      b0</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">num_items</span> <span class="o">=</span> <span class="n">num_items</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">num_positions</span> <span class="o">=</span> <span class="n">num_positions</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">a0</span> <span class="o">=</span> <span class="n">a0</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">b0</span> <span class="o">=</span> <span class="n">b0</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">prior_success</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">a0</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_items</span><span class="p">)])</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">prior_failure</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">b0</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_items</span><span class="p">)])</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">epsilon</span> <span class="o">=</span> <span class="n">epsilon</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">timestep</span> <span class="o">=</span> <span class="mi">1</span>
+
+  <span class="k">def</span> <span class="nf">set_prior</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prior_success</span><span class="p">,</span> <span class="n">prior_failure</span><span class="p">):</span>
+    <span class="c1"># Overwrite the default prior</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">prior_success</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">prior_success</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">prior_failure</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">prior_failure</span><span class="p">)</span>
 
   <span class="k">def</span> <span class="nf">get_posterior_mean</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">prior_success</span> <span class="o">/</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">prior_success</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">prior_failure</span><span class="p">)</span>
@@ -13379,320 +13999,147 @@ a.anchor-link {
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">beta</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">prior_success</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">prior_failure</span><span class="p">)</span>
 
   <span class="k">def</span> <span class="nf">update_observation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">observation</span><span class="p">,</span> <span class="n">action</span><span class="p">,</span> <span class="n">reward</span><span class="p">):</span>
-    <span class="c1"># Naive error checking for compatibility with environment</span>
-    <span class="k">assert</span> <span class="n">observation</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_arm</span>
+    <span class="sd">&quot;&quot;&quot;Updates observations for cascading bandits.</span>
 
-    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">reward</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>
-      <span class="bp">self</span><span class="o">.</span><span class="n">prior_success</span><span class="p">[</span><span class="n">action</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
-    <span class="k">elif</span> <span class="n">np</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">reward</span><span class="p">,</span> <span class="mi">0</span><span class="p">):</span>
+<span class="sd">    Args:</span>
+<span class="sd">      observation - tuple of (round_failure, round_success) each lists of items</span>
+<span class="sd">      action - action_list of all the actions tried prior round</span>
+<span class="sd">      reward - success or not</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">action</span> <span class="ow">in</span> <span class="n">observation</span><span class="p">[</span><span class="s1">&#39;round_failure&#39;</span><span class="p">]:</span>
       <span class="bp">self</span><span class="o">.</span><span class="n">prior_failure</span><span class="p">[</span><span class="n">action</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
-    <span class="k">else</span><span class="p">:</span>
-      <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Rewards should be 0 or 1 in Bernoulli Bandit&#39;</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">action</span> <span class="ow">in</span> <span class="n">observation</span><span class="p">[</span><span class="s1">&#39;round_success&#39;</span><span class="p">]:</span>
+      <span class="bp">self</span><span class="o">.</span><span class="n">prior_success</span><span class="p">[</span><span class="n">action</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="c1"># Update timestep for UCB agents</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">timestep</span> <span class="o">+=</span> <span class="mi">1</span>
 
   <span class="k">def</span> <span class="nf">pick_action</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">observation</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Take random action prob epsilon, else be greedy.&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">()</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">epsilon</span><span class="p">:</span>
-      <span class="n">action</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_arm</span><span class="p">)</span>
+      <span class="n">action_list</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span>
+          <span class="n">low</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">num_items</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">num_positions</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
       <span class="n">posterior_means</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_posterior_mean</span><span class="p">()</span>
-      <span class="n">action</span> <span class="o">=</span> <span class="n">random_argmax</span><span class="p">(</span><span class="n">posterior_means</span><span class="p">)</span>
+      <span class="n">action_list</span> <span class="o">=</span> <span class="n">posterior_means</span><span class="o">.</span><span class="n">argsort</span><span class="p">()[::</span><span class="o">-</span><span class="mi">1</span><span class="p">][:</span><span class="bp">self</span><span class="o">.</span><span class="n">num_positions</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">action_list</span>
 
-    <span class="k">return</span> <span class="n">action</span>
-</pre></div>
 
-    </div>
-</div>
-</div>
+<span class="c1">##############################################################################</span>
 
-</div></section><section>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">Agent 2: TS</span>
-<span class="sd">&quot;&quot;&quot;</span>
-<span class="k">class</span> <span class="nc">FiniteBernoulliBanditTS</span><span class="p">(</span><span class="n">FiniteBernoulliBanditEpsilonGreedy</span><span class="p">):</span>
-  <span class="sd">&quot;&quot;&quot;Thompson sampling on finite armed bandit.&quot;&quot;&quot;</span>
+
+<span class="k">def</span> <span class="nf">_ucb_1</span><span class="p">(</span><span class="n">empirical_mean</span><span class="p">,</span> <span class="n">timestep</span><span class="p">,</span> <span class="n">count</span><span class="p">):</span>
+  <span class="sd">&quot;&quot;&quot;Computes UCB1 upper confidence bound.</span>
+
+<span class="sd">  Args:</span>
+<span class="sd">    empirical_mean - empirical mean</span>
+<span class="sd">    timestep - time elapsed</span>
+<span class="sd">    count - number of visits to that object</span>
+<span class="sd">  &quot;&quot;&quot;</span>
+  <span class="n">confidence</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="mf">1.5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">timestep</span><span class="p">))</span> <span class="o">/</span> <span class="n">count</span><span class="p">)</span>
+  <span class="k">return</span> <span class="n">empirical_mean</span> <span class="o">+</span> <span class="n">confidence</span>
+
+
+<span class="k">class</span> <span class="nc">CascadingBanditUCB1</span><span class="p">(</span><span class="n">CascadingBanditEpsilonGreedy</span><span class="p">):</span>
 
   <span class="k">def</span> <span class="nf">pick_action</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">observation</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Thompson sampling with Beta posterior for action selection.&quot;&quot;&quot;</span>
-    <span class="n">sampled_means</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_posterior_sample</span><span class="p">()</span>
-    <span class="n">action</span> <span class="o">=</span> <span class="n">random_argmax</span><span class="p">(</span><span class="n">sampled_means</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">action</span>
+    <span class="n">posterior_means</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_posterior_mean</span><span class="p">()</span>
+    <span class="n">ucb_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_items</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_items</span><span class="p">):</span>
+      <span class="n">count</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">prior_success</span><span class="p">[</span><span class="n">item</span><span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">prior_failure</span><span class="p">[</span><span class="n">item</span><span class="p">]</span>
+      <span class="n">ucb_values</span><span class="p">[</span><span class="n">item</span><span class="p">]</span> <span class="o">=</span> <span class="n">_ucb_1</span><span class="p">(</span><span class="n">posterior_means</span><span class="p">[</span><span class="n">item</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">timestep</span><span class="p">,</span> <span class="n">count</span><span class="p">)</span>
+
+    <span class="n">action_list</span> <span class="o">=</span> <span class="n">ucb_values</span><span class="o">.</span><span class="n">argsort</span><span class="p">()[::</span><span class="o">-</span><span class="mi">1</span><span class="p">][:</span><span class="bp">self</span><span class="o">.</span><span class="n">num_positions</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">action_list</span>
+
+
+<span class="c1">##############################################################################</span>
+
+
+<span class="k">def</span> <span class="nf">_kl_ucb</span><span class="p">(</span><span class="n">empirical_mean</span><span class="p">,</span> <span class="n">timestep</span><span class="p">,</span> <span class="n">count</span><span class="p">,</span> <span class="n">tolerance</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span> <span class="n">maxiter</span><span class="o">=</span><span class="mi">25</span><span class="p">):</span>
+  <span class="sd">&quot;&quot;&quot;Computes KL-UCB via binary search</span>
+
+<span class="sd">  Args:</span>
+<span class="sd">    empirical_mean - empirical mean</span>
+<span class="sd">    timestep - time elapsed</span>
+<span class="sd">    count - number of visits to that object</span>
+<span class="sd">    tolerance - accuracy for numerical bisection</span>
+<span class="sd">    maxiter - maximum number of iterations</span>
+<span class="sd">  &quot;&quot;&quot;</span>
+  <span class="n">kl_bound</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">timestep</span><span class="p">)</span> <span class="o">+</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">timestep</span> <span class="o">+</span> <span class="mf">1e-6</span><span class="p">)))</span> <span class="o">/</span> <span class="n">count</span>
+  <span class="n">upper_bound</span> <span class="o">=</span> <span class="mi">1</span>
+  <span class="n">lower_bound</span> <span class="o">=</span> <span class="n">empirical_mean</span>
+
+  <span class="c1"># Most of the experiment is spent for small values of KL --&gt; biased search</span>
+  <span class="n">n_iter</span> <span class="o">=</span> <span class="mi">0</span>
+  <span class="k">while</span> <span class="p">(</span><span class="n">upper_bound</span> <span class="o">-</span> <span class="n">lower_bound</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">tolerance</span><span class="p">:</span>
+    <span class="n">n_iter</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="n">midpoint</span> <span class="o">=</span> <span class="p">(</span><span class="n">upper_bound</span> <span class="o">+</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">lower_bound</span><span class="p">)</span> <span class="o">/</span> <span class="mi">4</span>
+    <span class="n">dist</span> <span class="o">=</span> <span class="n">_d_kl</span><span class="p">(</span><span class="n">empirical_mean</span><span class="p">,</span> <span class="n">midpoint</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">dist</span> <span class="o">&lt;</span> <span class="n">kl_bound</span><span class="p">:</span>
+      <span class="n">lower_bound</span> <span class="o">=</span> <span class="n">midpoint</span>
+    <span class="k">else</span><span class="p">:</span>
+      <span class="n">upper_bound</span> <span class="o">=</span> <span class="n">midpoint</span>
+
+    <span class="k">if</span> <span class="n">n_iter</span> <span class="o">&gt;</span> <span class="n">maxiter</span><span class="p">:</span>
+      <span class="nb">print</span><span class="p">(</span>
+          <span class="s1">&#39;WARNING: maximum number of iterations exceeded, accuracy only </span><span class="si">%0.2f</span><span class="s1">&#39;</span>
+          <span class="o">%</span> <span class="p">(</span><span class="n">upper_bound</span> <span class="o">-</span> <span class="n">lower_bound</span><span class="p">,))</span>
+      <span class="k">break</span>
+
+  <span class="k">return</span> <span class="n">lower_bound</span>
+
+
+<span class="k">def</span> <span class="nf">_d_kl</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">epsilon</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">):</span>
+  <span class="sd">&quot;&quot;&quot;Compute the KL divergence for single numbers.&quot;&quot;&quot;</span>
+  <span class="k">if</span> <span class="n">p</span> <span class="o">&lt;=</span> <span class="n">epsilon</span><span class="p">:</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="mi">0</span>
+  <span class="k">else</span><span class="p">:</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span> <span class="k">if</span> <span class="n">q</span> <span class="o">&lt;=</span> <span class="n">epsilon</span> <span class="k">else</span> <span class="n">p</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">p</span> <span class="o">/</span> <span class="n">q</span><span class="p">)</span>
+
+  <span class="k">if</span> <span class="n">p</span> <span class="o">&gt;=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">epsilon</span><span class="p">:</span>
+    <span class="n">B</span> <span class="o">=</span> <span class="mi">0</span>
+  <span class="k">else</span><span class="p">:</span>
+    <span class="n">B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span> <span class="k">if</span> <span class="n">q</span> <span class="o">&gt;=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">epsilon</span> <span class="k">else</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">p</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">((</span><span class="mi">1</span> <span class="o">-</span> <span class="n">p</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">q</span><span class="p">))</span>
+
+  <span class="k">return</span> <span class="n">A</span> <span class="o">+</span> <span class="n">B</span>
+
+
+<span class="k">class</span> <span class="nc">CascadingBanditKLUCB</span><span class="p">(</span><span class="n">CascadingBanditEpsilonGreedy</span><span class="p">):</span>
+
+  <span class="k">def</span> <span class="nf">pick_action</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">observation</span><span class="p">):</span>
+    <span class="n">posterior_means</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_posterior_mean</span><span class="p">()</span>
+    <span class="n">ucb_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_items</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_items</span><span class="p">):</span>
+      <span class="n">count</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">prior_success</span><span class="p">[</span><span class="n">item</span><span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">prior_failure</span><span class="p">[</span><span class="n">item</span><span class="p">]</span>
+      <span class="n">ucb_values</span><span class="p">[</span><span class="n">item</span><span class="p">]</span> <span class="o">=</span> <span class="n">_kl_ucb</span><span class="p">(</span><span class="n">posterior_means</span><span class="p">[</span><span class="n">item</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">timestep</span><span class="p">,</span> <span class="n">count</span><span class="p">)</span>
+
+    <span class="n">action_list</span> <span class="o">=</span> <span class="n">ucb_values</span><span class="o">.</span><span class="n">argsort</span><span class="p">()[::</span><span class="o">-</span><span class="mi">1</span><span class="p">][:</span><span class="bp">self</span><span class="o">.</span><span class="n">num_positions</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">action_list</span>
+
+
+<span class="c1">##############################################################################</span>
+
+
+<span class="k">class</span> <span class="nc">CascadingBanditTS</span><span class="p">(</span><span class="n">CascadingBanditEpsilonGreedy</span><span class="p">):</span>
+
+  <span class="k">def</span> <span class="nf">pick_action</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">observation</span><span class="p">):</span>
+    <span class="n">posterior_sample</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_posterior_sample</span><span class="p">()</span>
+    <span class="n">action_list</span> <span class="o">=</span> <span class="n">posterior_sample</span><span class="o">.</span><span class="n">argsort</span><span class="p">()[::</span><span class="o">-</span><span class="mi">1</span><span class="p">][:</span><span class="bp">self</span><span class="o">.</span><span class="n">num_positions</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">action_list</span>
 </pre></div>
 
     </div>
 </div>
 </div>
 
-</div></section><section>
+</div>
+</aside></div></section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<div align=center><img src="https://raw.githubusercontent.com/liangzp/Online-Learning/master/finite_simple_greedy_action.png" width = "800" height = "400" alt="finite_simple_greedy_action" align=center/></div>
-</div>
-</div>
-</div></section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<div align=center><img src="https://raw.githubusercontent.com/liangzp/Online-Learning/master/finite_simple_ts_action.png" width = "800" height = "400" alt="finite_simple_ts_action" align=center/></div>
-</div>
-</div>
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Approximations">Approximations<a class="anchor-link" href="#Approximations">&#182;</a></h2>
-</div>
-</div>
-</div><div class="fragment">
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="1.-Laplace-Approximation">1. Laplace Approximation<a class="anchor-link" href="#1.-Laplace-Approximation">&#182;</a></h3>$$
-ln(g(\phi))\approx ln(g(\overline{\phi}))-\frac{1}{2}(\phi-\overline{\phi})^T C (\phi-\overline{\phi})
-$$<p>where $\overline{\phi}$ is its mode and $C=-\nabla^2 ln(g(\overline{\phi}))$</p>
-$$g(\phi) \propto e^{-\frac{1}{2}(\phi-\overline{\phi})^T C (\phi-\overline{\phi})}$$<p><br/>
-$$g(\phi) =\sqrt{\frac{C}{2\pi}}e^{-\frac{1}{2}(\phi-\overline{\phi})^T C (\phi-\overline{\phi})}$$</p>
-<div align=center><img src="https://raw.githubusercontent.com/liangzp/Online-Learning/master/laplace_modes.png" width = "350" height = "250" alt="Laplace" align=center/></div>
-</div>
-</div>
-</div></div></section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Bernoulli</strong>:</p>
-$$
-\begin{aligned}
-f(\theta)&amp;\propto \theta^s(1-\theta)^{n-s}\\
-ln f(\theta)&amp;=const+sln(\theta)+(n-s)ln(1-\theta)\\
-\frac{dL(\theta)}{d\theta}&amp;=\frac{s}{\theta}-\frac{n-s}{1-\theta}=0\rightarrow \theta_0=\frac{s}{n}=\overline{\phi}\\
-\frac{d^2L(\theta)}{d\theta^2}&amp;=-\frac{s}{\theta^2}-\frac{n-s}{(1-\theta)^2}=-\frac{n}{\theta(1-\theta)}=C\\
-\end{aligned}
-$$
-</div>
-</div>
-</div><div class="fragment">
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">FiniteBernoulliBanditLaplace</span><span class="p">(</span><span class="n">FiniteBernoulliBanditTS</span><span class="p">):</span>
-  <span class="sd">&quot;&quot;&quot;Laplace Thompson sampling on finite armed bandit.&quot;&quot;&quot;</span>
-
-  <span class="k">def</span> <span class="nf">get_posterior_sample</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Gaussian approximation to posterior density (match moments).&quot;&quot;&quot;</span>
-    <span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">prior_success</span> <span class="o">+</span> <span class="mf">1e-6</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">prior_failure</span> <span class="o">+</span> <span class="mf">1e-6</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
-    <span class="c1"># The modes are not well defined unless alpha, beta &gt; 1</span>
-    <span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">a</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
-    <span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">b</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
-    <span class="n">mode</span> <span class="o">=</span> <span class="n">a</span> <span class="o">/</span> <span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span>
-    <span class="c1">#hessian = a / mode + b / (1 - mode)</span>
-    <span class="n">hessian</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">mode</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">mode</span><span class="p">))</span>
-    <span class="n">laplace_sample</span> <span class="o">=</span> <span class="n">mode</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">hessian</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_arm</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">laplace_sample</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div></div></section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="2.-Langevin-Monte-Carlo">2. Langevin Monte Carlo<a class="anchor-link" href="#2.-Langevin-Monte-Carlo">&#182;</a></h3>
-</div>
-</div>
-</div><div class="fragment">
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-$$
-d\phi_t=\nabla ln(g(\phi_t))dt+\sqrt{2}dB_t
-$$
-</div>
-</div>
-</div></div><div class="fragment">
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h5 id="Euler-discretization">Euler discretization<a class="anchor-link" href="#Euler-discretization">&#182;</a></h5>$$
-\phi_{n+1}=\phi_n+\epsilon\nabla ln(g(\phi_n))+\sqrt{2\epsilon}W_n
-$$
-</div>
-</div>
-</div></div></section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h5 id="Modification-1:-Stochastic-gradient-Langevin-Monte-Carlo">Modification 1: Stochastic gradient Langevin Monte Carlo<a class="anchor-link" href="#Modification-1:-Stochastic-gradient-Langevin-Monte-Carlo">&#182;</a></h5><p><br/></p>
-<center>Exact gradients $\rightarrow$Mini-batches approximate</center>
-</div>
-</div>
-</div></section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h5 id="Modification-2:-Preconditioning-matrix">Modification 2: Preconditioning matrix<a class="anchor-link" href="#Modification-2:-Preconditioning-matrix">&#182;</a></h5><p><br/>
-$$
-\phi_{n+1}=\phi_n+\epsilon A \nabla ln(g(\phi_n))+\sqrt{2\epsilon}AW_n
-$$</p>
-<p><br/>
-where $A=-(\nabla^2 ln(g(\phi))|_{\phi=\phi_0})^{-1}$ and $W_n\sim N(0,1)$</p>
-
-</div>
-</div>
-</div><div class="fragment">
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>How to understand</strong></p>
-<div align=center><img src="https://raw.githubusercontent.com/liangzp/Online-Learning/master/Precondition.png" width = "1000" height = "800" alt="Precondition" align=center/></div>
-</div>
-</div>
-</div></div></section><section>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[21]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">FiniteBernoulliBanditLangevin</span><span class="p">(</span><span class="n">FiniteBernoulliBanditTS</span><span class="p">):</span>
-  <span class="sd">&#39;&#39;&#39;Langevin method for approximate posterior sampling.&#39;&#39;&#39;</span> 
-  <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">n_arm</span><span class="p">,</span> <span class="n">step_count</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span><span class="n">step_size</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span><span class="n">a0</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">b0</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">epsilon</span><span class="o">=</span><span class="mf">0.0</span><span class="p">):</span>
-    <span class="n">FiniteBernoulliBanditTS</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">n_arm</span><span class="p">,</span> <span class="n">a0</span><span class="p">,</span> <span class="n">b0</span><span class="p">,</span> <span class="n">epsilon</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">step_count</span> <span class="o">=</span> <span class="n">step_count</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">step_size</span> <span class="o">=</span> <span class="n">step_size</span>
-  
-  <span class="k">def</span> <span class="nf">project</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">x</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;projects the vector x onto [_SMALL_NUMBER,1-_SMALL_NUMBER] to prevent</span>
-<span class="sd">    numerical overflow.&#39;&#39;&#39;</span>
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">_SMALL_NUMBER</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">_SMALL_NUMBER</span><span class="p">))</span>
-  
-  <span class="k">def</span> <span class="nf">compute_gradient</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">x</span><span class="p">):</span>
-    <span class="n">grad</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">prior_success</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="n">x</span> <span class="o">-</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">prior_failure</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">x</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">grad</span>
-    
-  <span class="k">def</span> <span class="nf">compute_preconditioners</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">x</span><span class="p">):</span>
-    <span class="n">second_derivatives</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">prior_success</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">prior_failure</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="p">((</span><span class="mi">1</span><span class="o">-</span><span class="n">x</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
-    <span class="n">second_derivatives</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">second_derivatives</span><span class="p">,</span><span class="n">_SMALL_NUMBER</span><span class="p">)</span>
-    <span class="n">preconditioner</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">second_derivatives</span><span class="p">)</span>
-    <span class="n">preconditioner_sqrt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">second_derivatives</span><span class="p">))</span>
-    <span class="k">return</span> <span class="n">preconditioner</span><span class="p">,</span><span class="n">preconditioner_sqrt</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div></section><section>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[22]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span>  <span class="k">def</span> <span class="nf">get_posterior_sample</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">prior_success</span> <span class="o">+</span> <span class="mf">1e-6</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">prior_failure</span> <span class="o">+</span> <span class="mf">1e-6</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
-    <span class="c1"># The modes are not well defined unless alpha, beta &gt; 1</span>
-    <span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">a</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
-    <span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">b</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
-    <span class="n">x_map</span> <span class="o">=</span> <span class="n">a</span> <span class="o">/</span> <span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span>
-    <span class="n">x_map</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">project</span><span class="p">(</span><span class="n">x_map</span><span class="p">)</span>
-    
-    <span class="n">preconditioner</span><span class="p">,</span> <span class="n">preconditioner_sqrt</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">compute_preconditioners</span><span class="p">(</span><span class="n">x_map</span><span class="p">)</span>
-   
-    <span class="n">x</span> <span class="o">=</span> <span class="n">x_map</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">step_count</span><span class="p">):</span>
-      <span class="n">g</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">compute_gradient</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-      <span class="n">scaled_grad</span> <span class="o">=</span> <span class="n">preconditioner</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
-      <span class="n">scaled_noise</span><span class="o">=</span> <span class="n">preconditioner_sqrt</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_arm</span><span class="p">))</span> 
-      <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">step_size</span><span class="o">*</span><span class="n">scaled_grad</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">step_size</span><span class="p">)</span><span class="o">*</span><span class="n">scaled_noise</span>
-      <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">project</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-      
-    <span class="k">return</span> <span class="n">x</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div></section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="3.-Bootstrapping">3. Bootstrapping<a class="anchor-link" href="#3.-Bootstrapping">&#182;</a></h3>
-</div>
-</div>
-</div><div class="fragment">
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<ol>
-<li>Generate a hypothetical history $\mathbb{\hat{H}}_{t-1}=((\hat{x}_1,\hat{y}_1),\dots,(\hat{x}_{t-1},\hat{y}_{t-1}))$</li>
-<li>$Max_{\theta} \ \ \ Likehood(\theta)$</li>
-</ol>
-
-</div>
-</div>
-</div></div><div class="fragment">
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">FiniteBernoulliBanditBootstrap</span><span class="p">(</span><span class="n">FiniteBernoulliBanditTS</span><span class="p">):</span>
-  <span class="sd">&quot;&quot;&quot;Bootstrapped Thompson sampling on finite armed bandit.&quot;&quot;&quot;</span>
-
-  <span class="k">def</span> <span class="nf">get_posterior_sample</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Use bootstrap resampling instead of posterior sample.&quot;&quot;&quot;</span>
-    <span class="n">total_tries</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">prior_success</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">prior_failure</span>
-    <span class="n">prob_success</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">prior_success</span> <span class="o">/</span> <span class="n">total_tries</span>
-    <span class="n">boot_sample</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">binomial</span><span class="p">(</span><span class="n">total_tries</span><span class="p">,</span> <span class="n">prob_success</span><span class="p">)</span> <span class="o">/</span> <span class="n">total_tries</span>
-    <span class="k">return</span> <span class="n">boot_sample</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div></div></section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<div align=center><img src="https://raw.githubusercontent.com/liangzp/Online-Learning/master/Approximation2.png" width = "1008" height = "800" alt="approximation2" align=center/></div>
-</div>
-</div>
-</div></section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<div align=center><img src="https://raw.githubusercontent.com/liangzp/Online-Learning/master/finite_simple_sanity_simple.png" width = "1000" height = "800" alt="Sanity Check" align=center/></div>
-</div>
-</div>
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Incremental-Implementation">Incremental Implementation<a class="anchor-link" href="#Incremental-Implementation">&#182;</a></h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Incremental version of the Laplace approximation</strong>
-$$
-\begin{aligned}
-H_t=H_{t-1}+\nabla^2 g_t(\overline{\theta}_{t-1})\\
-\overline{\theta}_t=\overline{\theta}_{t-1}-H_t^{-1}\nabla g_t(\overline{\theta}_{t-1})
-\end{aligned}
-$$</p>
-<p>where $g_t(\theta)=ln(l_t(\theta))$  and  $\overline{\theta}_k=argmax_{\theta}g_k(\theta)$</p>
-
+<div align=center><img width = '800' height ='800' src ="https://raw.githubusercontent.com/liangzp/Online-Learning/master/cascading.png"/></div>
 </div>
 </div>
 </div></section></section>
